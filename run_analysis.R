@@ -1,12 +1,11 @@
 # Load data from the UCI HAR Dataset
 # RG Willhoft, 2019
 
-library(plyr)
+library(dplyr)
 
 activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt", sep = " ", stringsAsFactors = FALSE)
 
 features <- read.table("./UCI HAR Dataset/features.txt", sep = " ", stringsAsFactors = FALSE)
-# TBD - Need to clean these feature names?
 
 # Read training data
 subject_train <- read.table("./UCI HAR Dataset/train/subject_train.txt")
@@ -14,6 +13,8 @@ measurements_train <- read.table("./UCI HAR Dataset/train/X_train.txt")
 activity_train <- read.table("./UCI HAR Dataset/train/y_train.txt")
 
 # Add variable to activity indicating that this is a "training" activity
+#   Since the activities are in upper case, I decided to use an uppercase
+#   string for TRAIN (the training set) and TEST (the test set)
 activity_train <- cbind("TRAIN", activity_train)
 names(activity_train) <- c("set", "activity")
 
@@ -31,11 +32,19 @@ subject_data <- rbind(subject_train, subject_test)
 measurements_data <- rbind(measurements_train, measurements_test)
 activity_data <- rbind(activity_train, activity_test)
 
-# Give it some good names
+# Give the data names
 names(subject_data) <- c("subject")
-
 names(measurements_data) <- features[,2]
+
+# Select only the measurements that are means or standard deviations (std)
+#   There were some measurements that were calculations done with means (such as
+#   "angle(tBodyGyroMean,gravityMean)"), it was decided that these did not fit the 
+#   specification and were not included.
 means_std_data <- measurements_data[,grep("[Mm]ean\\(\\)|[Ss]td\\(\\)", names(measurements_data), value = TRUE)]
+# Clean up the measurements (variable) names
+#   It was decided to leave the names in camal-case to make it easier to read the names
+#   The dashes ("-" and parentheses ("(" and ")" were removed - leaving these in makes it much
+#   harder when using tools suchs as plyr and dplyr
 names(means_std_data) <- sub("-[Mm]ean\\(\\)", "Mean", names(means_std_data))
 names(means_std_data) <- sub("-[Ss]td\\(\\)", "Std", names(means_std_data))
 names(means_std_data) <- sub("\\(\\)", "", names(means_std_data))
