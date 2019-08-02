@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -342,18 +343,6 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -379,51 +368,47 @@ $(document).ready(function () {
 
 <div id="course3project" class="section level1">
 <h1>course3project</h1>
-<div id="peer-graded-assignment" class="section level2">
-<h2>Peer-graded Assignment:</h2>
-</div>
+<hr />
 <div id="getting-and-cleaning-data-course-project" class="section level2">
 <h2>Getting and Cleaning Data Course Project</h2>
+<div id="peer-graded-assignment" class="section level3">
+<h3>Peer-graded Assignment</h3>
 <p>RG Willhoft</p>
 <p>August 1, 2019</p>
 <hr />
-<p>Getting and Cleaning Data Course Project The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. You will be graded by your peers on a series of yes/no questions related to the project. You will be required to submit: 1) a tidy data set as described below, 2) a link to a Github repository with your script for performing the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md. You should also include a README.md in the repo with your scripts. This repo explains how all of the scripts work and how they are connected.</p>
-<p>One of the most exciting areas in all of data science right now is wearable computing - see for example <a href="http://www.insideactivitytracking.com/data-science-activity-tracking-and-the-battle-for-the-worlds-top-sports-brand/">this article</a>. Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained:</p>
+<p>The purpose of this project is to demonstrate the ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis.</p>
+<p>The following items are created (and submitted) for this project:</p>
+<ol style="list-style-type: decimal">
+<li>Two tidy data sets as described below.</li>
+<li>A Github repository with the script for performing the analysis.</li>
+<li>A code book that describes the variables, the data, and the transformations performed to clean up the data.</li>
+<li>A README.md.</li>
+</ol>
+<p>The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained:</p>
 <p><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a></p>
-<p>Here are the data for the project:</p>
+<p>Here are the data used for the project:</p>
 <p><a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip" class="uri">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a></p>
 <hr />
-<p>You should create one R script called run_analysis.R that does the following.</p>
-<p>Merges the training and the test sets to create one data set. Extracts only the measurements on the mean and standard deviation for each measurement. Uses descriptive activity names to name the activities in the data set Appropriately labels the data set with descriptive variable names. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. Good luck! —</p>
 </div>
 </div>
-<div id="the-dataset-includes-the-following-files" class="section level1">
-<h1>The dataset includes the following files:</h1>
-<ul>
-<li><p>‘README.txt’</p></li>
-<li><p>‘features_info.txt’: Shows information about the variables used on the feature vector.</p></li>
-<li><p>‘features.txt’: List of all features.</p></li>
-<li><p>‘activity_labels.txt’: Links the class labels with their activity name.</p></li>
-<li><p>‘train/X_train.txt’: Training set.</p></li>
-<li><p>‘train/y_train.txt’: Training labels.</p></li>
-<li><p>‘test/X_test.txt’: Test set.</p></li>
-<li><p>‘test/y_test.txt’: Test labels.</p></li>
-</ul>
-<p>The following files are available for the train and test data. Their descriptions are equivalent.</p>
-<ul>
-<li><p>‘train/subject_train.txt’: Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30.</p></li>
-<li><p>‘train/Inertial Signals/total_acc_x_train.txt’: The acceleration signal from the smartphone accelerometer X axis in standard gravity units ‘g’. Every row shows a 128 element vector. The same description applies for the ‘total_acc_x_train.txt’ and ‘total_acc_z_train.txt’ files for the Y and Z axis.</p></li>
-<li><p>‘train/Inertial Signals/body_acc_x_train.txt’: The body acceleration signal obtained by subtracting the gravity from the total acceleration.</p></li>
-<li><p>‘train/Inertial Signals/body_gyro_x_train.txt’: The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second.</p></li>
-</ul>
 </div>
-<div id="notes" class="section level1">
-<h1>Notes:</h1>
+<div id="files" class="section level1">
+<h1>Files</h1>
 <ul>
-<li>Features are normalized and bounded within [-1,1].</li>
-<li>Each feature vector is a row on the text file.</li>
+<li>README.md - This file with a basic description of the project.
+<ul>
+<li>README.html - An html version of the above file.</li>
+</ul></li>
+<li>run_analysis.R - The R script for processing the data and producing the two new data sets.</li>
+<li>CodeBook.md - A description of the two data sets created.
+<ul>
+<li>CodeBook.html - An html version of the above file.</li>
+</ul></li>
+<li>analysis_data.Rda - The <code>data</code> created by the <code>run_analysis.R</code>.</li>
+<li>analysis_data_means.Rda - The <code>data_means</code> created by the <code>run_analysis.R</code>.</li>
+<li>load_analysis.R - A script that will load the two data sets.</li>
 </ul>
-<p>For more information about this dataset contact: <a href="mailto:activityrecognition@smartlab.ws" class="email">activityrecognition@smartlab.ws</a></p>
+<p><em>Note: The original data files are not included, please see the references above for obtaining a copy of these files.</em></p>
 </div>
 
 
@@ -443,6 +428,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
