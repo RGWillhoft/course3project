@@ -61,3 +61,10 @@ data$set <- as.factor(data$set)
 data$activity <- as.factor(data$activity)
 data$subject <- as.factor(data$subject)
 
+# Create data set with means
+
+data_means <- data %>%
+  select(-set) %>%                  # Remove the information on TRAINING or TEST
+  group_by(activity, subject) %>%   
+  summarize_all(mean)
+
