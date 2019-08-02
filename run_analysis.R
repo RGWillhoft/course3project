@@ -1,7 +1,10 @@
-# Load data from the UCI HAR Dataset
+# Peer-graded Assignment: 
+# Getting and Cleaning Data Course Project
 # RG Willhoft, 2019
 
 library(dplyr)
+
+# Load data from the UCI HAR Dataset
 
 activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt", sep = " ", stringsAsFactors = FALSE)
 
@@ -68,3 +71,12 @@ data_means <- data %>%
   group_by(activity, subject) %>%   
   summarize_all(mean)
 
+# The following code will create separate means for the training and test data
+# data_means <- data %>%
+#   group_by(set, activity, subject) %>%   
+#   summarize_all(mean)
+
+# Write two data sets to files
+
+save( data, file = "analysis_data.Rda")
+save( data_means, file = "analysis_data_means.Rda")
