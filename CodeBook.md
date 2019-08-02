@@ -1,69 +1,179 @@
-==================================================================
-Human Activity Recognition Using Smartphones Dataset
-Version 1.0
-==================================================================
-Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
-Smartlab - Non Linear Complex Systems Laboratory
-DITEN - Università degli Studi di Genova.
-Via Opera Pia 11A, I-16145, Genoa, Italy.
-activityrecognition@smartlab.ws
-www.smartlab.ws
-==================================================================
+# Human Activity Recognition Using Smartphones Dataset
 
-The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+## Tidy Data Sets for Measurement Means and Standard Deviations
+
+RG Willhoft
+
+August 1, 2019
+
+---
+
+# Description
+
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
 
-For each record it is provided:
-======================================
+# Data Sets
 
-- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
-- Triaxial Angular velocity from the gyroscope. 
-- A 561-feature vector with time and frequency domain variables. 
-- Its activity label. 
-- An identifier of the subject who carried out the experiment.
+The following two data sets are created by the `run_analysis.R` program.
 
-The dataset includes the following files:
-=========================================
+## `data` data set
 
-- 'README.txt'
+This data set provides the following:
 
-- 'features_info.txt': Shows information about the variables used on the feature vector.
+- Merges the training and the test sets to create one data set.
+- Extracts only the measurements on the mean and standard deviation for each measurement.
+- Uses descriptive activity names to name the activities in the data set
+- Appropriately labels the data set with descriptive variable names.
 
-- 'features.txt': List of all features.
+There are 10299 observations in the data set, 7352 from the traning set and 2947 from the test set. The variables within this data set are described below.
 
-- 'activity_labels.txt': Links the class labels with their activity name.
+### [,1] - set variable
 
-- 'train/X_train.txt': Training set.
+The `set` variable indicates if the observation is from the training or test data set:
 
-- 'train/y_train.txt': Training labels.
+- TRAIN - training set
+- TEST - test set
 
-- 'test/X_test.txt': Test set.
+### [,2] - activity variable
 
-- 'test/y_test.txt': Test labels.
+The `activity` variable indicates the action that the volunteer was doing during this observation. The values are:
 
-The following files are available for the train and test data. Their descriptions are equivalent. 
+- WALKING
+- WALKING\_UPSTAIRS
+- WALKING\_DOWNSTAIRS
+- SITTING
+- STANDING 
+- LAYING
 
-- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+### [,3] - subject variable
 
-- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
+The `subject` is a numerical indication (1-30) of the volunteer performating the activity.
 
-- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
+### Measurement Data
 
-- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
+The variable names are based heavily on the original data. The following can help in determining the various values:
 
-Notes: 
-======
-- Features are normalized and bounded within [-1,1].
-- Each feature vector is a row on the text file.
+- Domain
+  - t - time domain
+  - f - frequency domain
+- Measurement Object
+  - Body - measurements of the subject's body
+  - Gravity - measurements of the environment
+- Measurement Device
+  - Acc - Accelerameter
+  - Gyro - Gyroscope
+  - Mag - Magnetic compass
+- Measurement Type
+  - (no indication) - Velocity
+  - Acc - Acceration
+  - Jerk - Jerk (dAcceration/dt)
+- Summary
+  - Mean - Mean of measurements
+  - Std - Standard deviation of measurements
+- Direction (if applicable)
 
-For more information about this dataset contact: activityrecognition@smartlab.ws
+| column(s) |                      | measurement(s)     |                    | 
+| --------- | -------------------- | ------------------ | ------------------ | 
+| [,4:6]    | tBodyAccMeanX        | tBodyAccMeanY      | tBodyAccMeanZ      |
+| [,7:9]    | tBodyAccStdX         | tBodyAccStdY       | tBodyAccStdZ       |
+| [,10:12]  | tGravityAccMeanX     | tGravityAccMeanY   | tGravityAccMeanZ   |
+| [,13:15]  | tGravityAccStdX      | tGravityAccStdY    | tGravityAccStdZ    | 
+| [,16:18]  | tBodyAccJerkMeanX    | tBodyAccJerkMeanY  | tBodyAccJerkMeanZ  |    
+| [,19:21]  | tBodyAccJerkStdX     | tBodyAccJerkStdY   | tBodyAccJerkStdZ   |     
+| [,22:24]  | tBodyGyroMeanX       | tBodyGyroMeanY     | tBodyGyroMeanZ     |      
+| [,25:27]  | tBodyGyroStdX        | tBodyGyroStdY      | tBodyGyroStdZ      |        
+| [,28:30]  | tBodyGyroJerkMeanX   | tBodyGyroJerkMeanY | tBodyGyroJerkMeanZ |   
+| [,31:33]  | tBodyGyroJerkStdX    | tBodyGyroJerkStdY  | tBodyGyroJerkStdZ  |    
+| [,34]     | tBodyAccMagMean      |
+| [,35]     | tBodyAccMagStd       |
+| [,36]     | tGravityAccMagMean   |
+| [,37]     | tGravityAccMagStd    |
+| [,38]     | tBodyAccJerkMagMean  | 
+| [,39]     | tBodyAccJerkMagStd   | 
+| [,40]     | tBodyGyroMagMean     |
+| [,41]     | tBodyGyroMagStd      |
+| [,42]     | tBodyGyroJerkMagMean | 
+| [,43]     | tBodyGyroJerkMagStd  |  
+| [,44:46]  | fBodyAccMeanX        | fBodyAccMeanY      | fBodyAccMeanZ      |
+| [,47:49]  | fBodyAccStdX         | fBodyAccStdY       | fBodyAccStdZ       |
+| [,50:52]  | fBodyAccJerkMeanX    | fBodyAccJerkMeanY  | fBodyAccJerkMeanZ  |
+| [,53:55]  | fBodyAccJerkStdX     | fBodyAccJerkStdY   | fBodyAccJerkStdZ   |
+| [,56:58]  | fBodyGyroMeanX       | fBodyGyroMeanY     | fBodyGyroMeanZ     |        
+| [,59:61]  | fBodyGyroStdX        | fBodyGyroStdY      | fBodyGyroStdZ      |     
+| [,62]     | fBodyAccMagMean      |
+| [,63]     | fBodyAccMagStd       |
+| [,64]     | fBodyAccJerkMagMean  | 
+| [,65]     | fBodyAccJerkMagStd   |
+| [,66]     | fBodyGyroMagMean     | 
+| [,67]     | fBodyGyroMagStd      |
+| [,68]     | fBodyGyroJerkMagMean |
+| [,69]     | fBodyGyroJerkMagStd  |
 
-License:
-========
-Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
+## `data_means` data set
 
-[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+The `data_means` is an independent tidy data set with the mean of each variable for each activity and each subject. There are 180 observations, 6 activities for each of the 30 volunteers. The data is very similar to the `data` data set, but without the `set` variable. The table below summarizes it:
+
+| column(s) |                      | measurement(s)     |                    | 
+| --------- | -------------------- | ------------------ | ------------------ | 
+| [,1]      | activity             |
+| [,2]      | subject              |
+| [,2:5]    | tBodyAccMeanX        | tBodyAccMeanY      | tBodyAccMeanZ      |
+| [,6:8]    | tBodyAccStdX         | tBodyAccStdY       | tBodyAccStdZ       |
+| [,9:11]   | tGravityAccMeanX     | tGravityAccMeanY   | tGravityAccMeanZ   |
+| [,12:14]  | tGravityAccStdX      | tGravityAccStdY    | tGravityAccStdZ    | 
+| [,15:17]  | tBodyAccJerkMeanX    | tBodyAccJerkMeanY  | tBodyAccJerkMeanZ  |    
+| [,18:20]  | tBodyAccJerkStdX     | tBodyAccJerkStdY   | tBodyAccJerkStdZ   |     
+| [,21:23]  | tBodyGyroMeanX       | tBodyGyroMeanY     | tBodyGyroMeanZ     |      
+| [,24:26]  | tBodyGyroStdX        | tBodyGyroStdY      | tBodyGyroStdZ      |        
+| [,27:29]  | tBodyGyroJerkMeanX   | tBodyGyroJerkMeanY | tBodyGyroJerkMeanZ |   
+| [,30:32]  | tBodyGyroJerkStdX    | tBodyGyroJerkStdY  | tBodyGyroJerkStdZ  |    
+| [,33]     | tBodyAccMagMean      |
+| [,34]     | tBodyAccMagStd       |
+| [,35]     | tGravityAccMagMean   |
+| [,36]     | tGravityAccMagStd    |
+| [,37]     | tBodyAccJerkMagMean  | 
+| [,38]     | tBodyAccJerkMagStd   | 
+| [,39]     | tBodyGyroMagMean     |
+| [,40]     | tBodyGyroMagStd      |
+| [,41]     | tBodyGyroJerkMagMean | 
+| [,42]     | tBodyGyroJerkMagStd  |  
+| [,43:45]  | fBodyAccMeanX        | fBodyAccMeanY      | fBodyAccMeanZ      |
+| [,46:48]  | fBodyAccStdX         | fBodyAccStdY       | fBodyAccStdZ       |
+| [,49:51]  | fBodyAccJerkMeanX    | fBodyAccJerkMeanY  | fBodyAccJerkMeanZ  |
+| [,52:54]  | fBodyAccJerkStdX     | fBodyAccJerkStdY   | fBodyAccJerkStdZ   |
+| [,55:57]  | fBodyGyroMeanX       | fBodyGyroMeanY     | fBodyGyroMeanZ     |        
+| [,58:60]  | fBodyGyroStdX        | fBodyGyroStdY      | fBodyGyroStdZ      |     
+| [,61]     | fBodyAccMagMean      |
+| [,62]     | fBodyAccMagStd       |
+| [,63]     | fBodyAccJerkMagMean  | 
+| [,64]     | fBodyAccJerkMagStd   |
+| [,65]     | fBodyGyroMagMean     | 
+| [,66]     | fBodyGyroMagStd      |
+| [,67]     | fBodyGyroJerkMagMean |
+| [,68]     | fBodyGyroJerkMagStd  |
+
+
+# References
+
+Article:
+
+http://www.insideactivitytracking.com/data-science-activity-tracking-and-the-battle-for-the-worlds-top-sports-brand/
+
+Site for the original data:
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+Data for the project:
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+## License
+
+Use of this dataset in publications must be acknowledged by referencing the following publication
+
+> Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
 This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
 
