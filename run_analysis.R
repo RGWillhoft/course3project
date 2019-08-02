@@ -80,3 +80,7 @@ data_means <- data %>%
 
 save( data, file = "analysis_data.Rda")
 save( data_means, file = "analysis_data_means.Rda")
+
+# Write the txt file required for submission
+write.table(data_means, file = "data_means.txt", row.names = FALSE)
+

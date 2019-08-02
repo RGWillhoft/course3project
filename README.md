@@ -39,6 +39,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
   - CodeBook.html - An html version of the above file.
 - analysis_data.Rda - The `data` created by the `run_analysis.R`.
 - analysis_data_means.Rda - The `data_means` created by the `run_analysis.R`.
+- data_means.txt - The `data_means` created by the `run_analysis.R` saved as a text file (as required for the project submission)
 - load_analysis.R - A script that will load the two data sets.
 
 _Note: The original data files are not included, please see the references above for obtaining a copy of these files._

@@ -7,7 +7,6 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -343,6 +342,18 @@ summary {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
@@ -406,6 +417,7 @@ summary {
 </ul></li>
 <li>analysis_data.Rda - The <code>data</code> created by the <code>run_analysis.R</code>.</li>
 <li>analysis_data_means.Rda - The <code>data_means</code> created by the <code>run_analysis.R</code>.</li>
+<li>data_means.txt - The <code>data_means</code> created by the <code>run_analysis.R</code> saved as a text file (as required for the project submission)</li>
 <li>load_analysis.R - A script that will load the two data sets.</li>
 </ul>
 <p><em>Note: The original data files are not included, please see the references above for obtaining a copy of these files.</em></p>
@@ -428,23 +440,6 @@ $(document).ready(function () {
 
 
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
