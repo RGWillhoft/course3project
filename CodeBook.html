@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -342,18 +343,6 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -386,10 +375,37 @@ $(document).ready(function () {
 <hr />
 </div>
 </div>
-<div id="description" class="section level1">
-<h1>Description</h1>
+<div id="description-from-the-original-codebook" class="section level1">
+<h1>Description (from the original codebook)</h1>
 <p>The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data.</p>
-<p>The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See ‘features_info.txt’ for more details.</p>
+<p>The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used.</p>
+</div>
+<div id="processing" class="section level1">
+<h1>Processing</h1>
+<p>There is a single R script called <code>run_analysis.R</code> that does the following:</p>
+<ol style="list-style-type: decimal">
+<li>Merges the training and the test sets to create one data set.</li>
+<li>Extracts only the measurements on the mean and standard deviation for each measurement.
+<ul>
+<li>There were some measurements that were calculations done with means (such as <code>angle(tBodyGyroMean,gravityMean)</code>), it was decided that these did not fit the specification and were not included.</li>
+</ul></li>
+<li>Uses descriptive activity names to name the activities in the data set
+<ul>
+<li>The numeric codes were replaced with descriptions of the activities.</li>
+<li>For consistancy between the processed and unprocessed data it was decided to not change the descriptions, i.e. leave them as uppercase with underscore separators.</li>
+</ul></li>
+<li>Appropriately labels the data set with descriptive variable names.
+<ul>
+<li>It was decided that for readability the names would be left in camel case.</li>
+<li>Removed the parentheses</li>
+<li>Removed any dashes</li>
+</ul></li>
+<li>From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+<ul>
+<li>This data set combines TRAIN and TEST data in the means.</li>
+</ul></li>
+</ol>
+<p><em>The <code>run_analysis.R</code> contains additional comments describing processing steps.</em></p>
 </div>
 <div id="data-sets" class="section level1">
 <h1>Data Sets</h1>
@@ -403,7 +419,7 @@ $(document).ready(function () {
 <li>Uses descriptive activity names to name the activities in the data set</li>
 <li>Appropriately labels the data set with descriptive variable names.</li>
 </ul>
-<p>There are 10299 observations in the data set, 7352 from the traning set and 2947 from the test set. The variables within this data set are described below.</p>
+<p>There are 10299 observations in the data set, 7352 from the training set and 2947 from the test set. The variables within this data set are described below.</p>
 <div id="set-variable" class="section level3">
 <h3>[,1] - set variable</h3>
 <p>The <code>set</code> variable indicates if the observation is from the training or test data set:</p>
@@ -426,7 +442,7 @@ $(document).ready(function () {
 </div>
 <div id="subject-variable" class="section level3">
 <h3>[,3] - subject variable</h3>
-<p>The <code>subject</code> is a numerical indication (1-30) of the volunteer performating the activity.</p>
+<p>The <code>subject</code> is a numerical indication (1-30) of the volunteer performing the activity.</p>
 </div>
 <div id="measurement-data" class="section level3">
 <h3>Measurement Data</h3>
@@ -444,15 +460,15 @@ $(document).ready(function () {
 </ul></li>
 <li>Measurement Device
 <ul>
-<li>Acc - Accelerameter</li>
+<li>Acc - Accelerometer</li>
 <li>Gyro - Gyroscope</li>
-<li>Mag - Magnetic compass</li>
 </ul></li>
 <li>Measurement Type
 <ul>
 <li>(no indication) - Velocity</li>
-<li>Acc - Acceration</li>
-<li>Jerk - Jerk (dAcceration/dt)</li>
+<li>Mag - Magnatude (i.e. absolute value of velocity)</li>
+<li>Acc - Acceleration</li>
+<li>Jerk - Jerk (_d_Acceleration/_d_t)</li>
 </ul></li>
 <li>Summary
 <ul>
@@ -914,8 +930,6 @@ $(document).ready(function () {
 </div>
 <div id="references" class="section level1">
 <h1>References</h1>
-<p>Article:</p>
-<p><a href="http://www.insideactivitytracking.com/data-science-activity-tracking-and-the-battle-for-the-worlds-top-sports-brand/" class="uri">http://www.insideactivitytracking.com/data-science-activity-tracking-and-the-battle-for-the-worlds-top-sports-brand/</a></p>
 <p>Site for the original data:</p>
 <p><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a></p>
 <p>Data for the project:</p>
@@ -923,9 +937,9 @@ $(document).ready(function () {
 <div id="license" class="section level2">
 <h2>License</h2>
 <p>Use of this dataset in publications must be acknowledged by referencing the following publication</p>
-<blockquote>
-<p>Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012</p>
-</blockquote>
+<ul>
+<li>Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012</li>
+</ul>
 <p>This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.</p>
 <p>Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.</p>
 </div>
@@ -948,6 +962,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

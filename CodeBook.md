@@ -8,11 +8,31 @@ August 1, 2019
 
 ---
 
-# Description
+# Description (from the original codebook)
 
 The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
-The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used.
+
+# Processing
+
+There is a single R script called `run_analysis.R` that does the following:
+
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement.
+    - There were some measurements that were calculations done with means (such as `angle(tBodyGyroMean,gravityMean)`), it was decided that these did not fit the specification and were not included.
+3. Uses descriptive activity names to name the activities in the data set
+    - The numeric codes were replaced with descriptions of the activities.
+    - For consistancy between the processed and unprocessed data it was decided to not change the descriptions, i.e. leave them as uppercase with underscore separators.
+4. Appropriately labels the data set with descriptive variable names.
+    - It was decided that for readability the names would be left in camel case.
+    - Removed the parentheses
+    - Removed any dashes
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+    - This data set combines TRAIN and TEST data in the means.
+
+_The `run_analysis.R` contains additional comments describing processing steps._
+
 
 # Data Sets
 
@@ -27,7 +47,7 @@ This data set provides the following:
 - Uses descriptive activity names to name the activities in the data set
 - Appropriately labels the data set with descriptive variable names.
 
-There are 10299 observations in the data set, 7352 from the traning set and 2947 from the test set. The variables within this data set are described below.
+There are 10299 observations in the data set, 7352 from the training set and 2947 from the test set. The variables within this data set are described below.
 
 ### [,1] - set variable
 
@@ -49,7 +69,7 @@ The `activity` variable indicates the action that the volunteer was doing during
 
 ### [,3] - subject variable
 
-The `subject` is a numerical indication (1-30) of the volunteer performating the activity.
+The `subject` is a numerical indication (1-30) of the volunteer performing the activity.
 
 ### Measurement Data
 
@@ -62,13 +82,13 @@ The variable names are based heavily on the original data. The following can hel
   - Body - measurements of the subject's body
   - Gravity - measurements of the environment
 - Measurement Device
-  - Acc - Accelerameter
+  - Acc - Accelerometer
   - Gyro - Gyroscope
-  - Mag - Magnetic compass
 - Measurement Type
   - (no indication) - Velocity
-  - Acc - Acceration
-  - Jerk - Jerk (dAcceration/dt)
+  - Mag - Magnatude (i.e. absolute value of velocity)
+  - Acc - Acceleration
+  - Jerk - Jerk (_d_Acceleration/_d_t)
 - Summary
   - Mean - Mean of measurements
   - Std - Standard deviation of measurements
@@ -157,10 +177,6 @@ The `data_means` is an independent tidy data set with the mean of each variable 
 
 # References
 
-Article:
-
-http://www.insideactivitytracking.com/data-science-activity-tracking-and-the-battle-for-the-worlds-top-sports-brand/
-
 Site for the original data:
 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
@@ -173,7 +189,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 
 Use of this dataset in publications must be acknowledged by referencing the following publication
 
-> Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+- Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
 This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
 
